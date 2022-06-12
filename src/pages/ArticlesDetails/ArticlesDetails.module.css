@@ -11,7 +11,7 @@
 .articleDataContainer{
     display: flex;
     flex-direction: column;
-    padding-top: 5%;
+    padding: 10% 0%;
 }
 
 .articleDataContainer h2{
@@ -37,14 +37,106 @@
 .articleImage{
     width: 100%;
     padding-top: 5%;
-    object-fit:cover;
    
-
    
+    /* object-fit:cover; */
 }
 
 .articleImage img{
     width: 100%;
     height: 100%;
+    margin: auto;
+    object-fit: cover;
+}
+
+.articleText {
+    padding: 5% 0%; 
+    width: 80%;
+    margin: auto;
+  
+}
+
+.articleText p {
+    line-height: 1.5;
+    color: #303030;
+    font-size: 1.2rem;
+    text-align: left;
+
+}
+
+.socialLinks {
+    display: flex;
+    width: 40%;
+    align-items: center;
+}
+
+.socialLinks img{
+    margin-right: 10%;
+    height: 100%;
+}
+
+
+.commentsContainer{
+    width: 80%;
+    margin: auto;
+    padding-bottom: 5%;
+}
+
+.commentHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.commentHeader h2{
+    color: #303030;
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.form input{
+    background: #C4C4C4;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    height: 60px; 
+    font-size: 1rem;
+    padding-left: 15px;
+}
+
+.nameEmail {
+    display: flex;
+    justify-content:space-between;
+    gap: 2.5rem;  
+}
+
+.form button {
+    
+    background: #5F2264;
+    border-radius: 5px;
+    width: 100px;
+    height: 50px ;
+    color: #F1F1F1;
+      
+}
+
+.usercomments{
+    background: rgba(249, 250, 251);
+    margin: 5% auto;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 80%;
+
+}
+
+.noComment {
+    display: flex;
+    justify-content: center;
+    margin: 5%;
+}
+
+.userCommentHeader{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
 }
 

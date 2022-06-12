@@ -5,15 +5,15 @@ import address from "../../assets/images/contactUs/address.png";
 import NGNflag from "../../assets/images/contactUs/Nigeriaflag.png";
 import CADflag from "../../assets/images/contactUs/Canadaflag.png";
 import contactImg from '../../assets/images/contactUs/contact.jpeg'
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ContactUs() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
-  const [reply, setReply] = useState("");
-  const [alert, setAlert] = useState(false);
+  
  
 
   
@@ -39,24 +39,16 @@ function ContactUs() {
             setEmail("");
             setMessage("")
             setPhoneNumber("");
-            setAlert(true)
-            setReply("Thanks for reaching out, we will get back to you soon!");
-            clearReply();
+            toast.success("Thanks for reaching out, we will get back to you soon!");
+            
           } else {
-            setAlert(true)
-            setReply("Please complete all fields");
-            clearReply();
+            toast.error("Please complete all fields"); 
           }
         } catch (err) {
           console.log(err);
         }
   }
 
-  const clearReply = () => {
-      setTimeout(() => {
-          setAlert(false)
-      }, 3000)
-  }
 
   return (
     <div className={style.ContactUsBody}>
@@ -157,13 +149,13 @@ function ContactUs() {
                  ></textarea>
                  </div>
                  <button type="submit" className={style.button}>Send Enquiry</button>
-                 {alert &&  <div className={style.reply}><p>{reply}</p></div> } 
+                 {/* {alert &&  <div className={style.reply}><p>{reply}</p></div> }  */}
                 
                 </form>
               </div>
           </div>          
      </section>
-  
+     <ToastContainer />
     </div>
   )
 }
