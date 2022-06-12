@@ -64,6 +64,7 @@ const ArticlesDetails = () => {
   // fetch article data from backend
   const getArticleData = async () => {
     const response = await axios(`https://appoga.herokuapp.com/blog/${id}`);
+    setLoading(false)
     setArticleData(response.data);
   };
 
@@ -123,111 +124,117 @@ const ArticlesDetails = () => {
 
   return (
     <div className={styles.main}>
-      <div className={styles.container}>
-        <section className={styles.articleDataContainer}>
-          <div className={styles.articlesDataHeader}>
-            <h2>{articleData.title}</h2>
-            <div className={styles.date}>
-              <img src={calender} alt="" />
-              <h5>{createDate}</h5>
+      {
+          loading ? <div className={styles.loading}> <Loader /></div>  : <div className={styles.container}>
+
+        {/*main article   */}
+          <section className={styles.articleDataContainer}>
+            <div className={styles.articlesDataHeader}>
+              <h2>{articleData.title}</h2>
+              <div className={styles.date}>
+                <img src={calender} alt="" />
+                <h5>{createDate}</h5>
+              </div>
             </div>
-          </div>
+  
+            <div className={styles.articleImage}>
+              <img src={articlesDetailsImage} alt="" />
+            </div>
+            <div className={styles.articleText}>
+              <p>{articleData.message}</p>
+            </div>
+            <div className={styles.socialLinks}>
+              <img src={fb} alt="facebook" />
+              <img src={twitter} alt="twitter" />
+              <img src={share} alt="share" />
+            </div>
+          </section>
+  
+  {/* user comments */}
+          <section className={styles.usercommentsContainer}>
+            <div className={styles.commentHeader}>
+              <h3>Comments({!userComment ? 0 : userComment.length})</h3>
+            </div>
+            {!userComment ? (
+              <div className={styles.noComment}>No Comments</div>
+            ) : (
+              userComment.map((comment: Comment, index) => {
+                return (
+                  <div className={styles.usercomments} key={index}>
+                    <div className={styles.userCommentHeader}>
+                      <h5>{comment.name}</h5>
+                      <h5>{comment.date}</h5>
+                    </div>
+                    <hr />
 
-          <div className={styles.articleImage}>
-            <img src={articlesDetailsImage} alt="" />
-          </div>
-          <div className={styles.articleText}>
-            <p>{articleData.message}</p>
-          </div>
-          <div className={styles.socialLinks}>
-            <img src={fb} alt="facebook" />
-            <img src={twitter} alt="twitter" />
-            <img src={share} alt="share" />
-          </div>
-        </section>
-
-{/* user comments */}
-        <section className={styles.usercommentsContainer}>
-          <div className={styles.commentHeader}>
-            <h3>Comments({!userComment ? 0 : userComment.length})</h3>
-          </div>
-          {!userComment ? (
-            <div className={styles.noComment}>No Comments</div>
-          ) : (
-            userComment.map((comment: Comment, index) => {
-              return (
-                <div className={styles.usercomments} key={index}>
-                  <div className={styles.userCommentHeader}>
-                    <h5>{comment.name}</h5>
-                    <h5>{comment.date}</h5>
+                    <p>{comment.comment}</p>
                   </div>
-
-                  <hr />
-                  <p>{comment.comment}</p>
-                </div>
-              );
-            })
-          )}
-        </section>
-
-
-{/* related articles */}
-        <section className={styles.relatedArticlesContainer}>
-          <h2></h2>
-          <div className={styles.relatedImages}>
-            <div>
-              <img src="" alt="" />
-              <p></p>
+                );
+              })
+            )}
+          </section>
+  
+  
+  {/* related articles */}
+          <section className={styles.relatedArticlesContainer}>
+            <h2></h2>
+            <div className={styles.relatedImages}>
+              <div>
+                <img src="" alt="" />
+                <p></p>
+              </div>
+  
+              <div>
+                <img src="" alt="" />
+                <p></p>
+              </div>
+  
+              <div>
+                <img src="" alt="" />
+                <p></p>
+              </div>
             </div>
-
-            <div>
-              <img src="" alt="" />
-              <p></p>
+            <p></p>
+          </section>
+  
+  {/* comments section */}
+          <section className={styles.commentsContainer}>
+            <div className={styles.commentHeader}>
+              <h2>Comments</h2>
             </div>
-
-            <div>
-              <img src="" alt="" />
-              <p></p>
-            </div>
-          </div>
-          <p></p>
-        </section>
-
-{/* comments section */}
-        <section className={styles.commentsContainer}>
-          <div className={styles.commentHeader}>
-            <h2>Comments</h2>
-          </div>
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.nameEmail}>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <div className={styles.nameEmail}>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="username"
+                  value={comments.username}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Email"
+                  name="email"
+                  value={comments.email}
+                  onChange={handleChange}
+                />
+              </div>
+  
               <input
                 type="text"
-                placeholder="Name"
-                name="username"
-                value={comments.username}
+                placeholder="Add a comment here..."
+                name="comment"
+                value={comments.comment}
                 onChange={handleChange}
               />
-              <input
-                type="text"
-                placeholder="Email"
-                name="email"
-                value={comments.email}
-                onChange={handleChange}
-              />
-            </div>
-
-            <input
-              type="text"
-              placeholder="Add a comment here..."
-              name="comment"
-              value={comments.comment}
-              onChange={handleChange}
-            />
-            <button type="submit">Send</button>
-          </form>
-          <ToastContainer />
-        </section>
-      </div>
+              <button type="submit">Send</button>
+            </form>
+            <ToastContainer />
+          </section>
+        </div>
+          
+        }
+      
     </div>
   );
 };
