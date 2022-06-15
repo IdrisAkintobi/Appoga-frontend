@@ -30,12 +30,15 @@
 }
 
 .card_button {
-  width: 45%;
+  padding: 0 12px;
+  min-width: 45%;
+  text-align: center;
+  width: fit-content;
   height: 40px;
   background: #5f2264;
   border-radius: 50px;
   font-family: "Poppins";
-  font-size: 1rem;
+  font-size: 0.9rem;
   border: none;
   color: white;
 }
@@ -44,12 +47,14 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #303030;
   margin-top: 20px;
 }
 
 .card_base {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -58,15 +63,17 @@
 }
 
 .right_base {
-  float: right;
+  vertical-align: middle;
   color: #5f2264;
 }
 
 .left_base {
-  float: left;
+  vertical-align: middle;
   margin-right: 10px;
 }
 
 .base_icon {
   vertical-align: middle;
+  padding-bottom: 2px;
+  margin: 0 6px;
 }
