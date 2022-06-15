@@ -7,10 +7,13 @@ import html from "../../assets/images/Projects/html.png";
 import css from "../../assets/images/Projects/css3.png"
 import react from "../../assets/images/Projects/react.png"
 import {Link} from 'react-router-dom'
+import Loader from "../../components/Loader/Loader"
+
 
 
 function ProjectsComponent() {
     const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() =>{
         requestProjects() 
@@ -18,48 +21,52 @@ function ProjectsComponent() {
 
     const requestProjects = async () => {
             const response = await axios('https://appoga.herokuapp.com/projects');
+            setLoading(false)
             setProjects(response.data)
     }
 
   return (
-    <div className={styles.container}>
 
-     {
-         
-         projects.map((project: Record<string, string>)=> {
-            
-        return (
-
-            
-            <div className={styles.project} key={project._id}>
-                <div className={styles.project_text}>
-                <div className={styles.project_content}>
-                    <h2>{project.name}</h2>
-                    <p>{project.overview}</p>
-                    <div className={styles.viewCaseStudy}>
-                        <h3>View Case Study</h3>
-                        <Link to="/projectDetails/:id" className={styles.link}><img src={arrow} alt="arrow" /></Link> 
-                    </div>
-                    
-                </div> 
-            
-                <div className={styles.box}>
-                    <img src={node} alt="node" />
-                    <img src={react} alt="" />
-                    <img src={html} alt="" />
-                    <img src={css} alt="" />
-                </div>
-            </div>
-            <div className={styles.project_img}>
-                <img src={project.featuredImage} alt="" />
-                <div className={styles.box}></div>
-            </div>
-    </div>
-
-         ) 
-         })
-     }         
-    </div>
+    <>
+    {
+        loading ? <div className={styles.loading}> <Loader /></div> :    <div className={styles.container}>
+        {    
+            projects.map((project: Record<string, string>)=> {
+               
+           return (
+               <div className={styles.project} key={project._id}>
+                   <div className={styles.project_text}>
+                   <div className={styles.project_content}>
+                       <h2>{project.name}</h2>
+                       <p>{project.overview.substring(0, 100)}</p>
+                       <div className={styles.viewCaseStudy}>
+                           <h3>View Case Study</h3>
+                           <Link to={`/projectDetails/${project._id}`} className={styles.link}><img src={arrow} alt="arrow" /></Link> 
+                       </div>
+                       
+                   </div> 
+               
+                   <div className={styles.box}>
+                       <img src={node} alt="node" />
+                       <img src={react} alt="react" />
+                       <img src={html} alt="html" />
+                       <img src={css} alt="css" />
+                   </div>
+               </div>
+               <div className={styles.project_img}>
+                   <img src={project.featuredImage} alt="" />
+                   <div className={styles.box}></div>
+               </div>
+       </div>
+   
+            ) 
+            })
+        }         
+       </div>
+    }
+    
+    </>
+ 
   )
 }
 

@@ -1,13 +1,15 @@
 import { useState,FormEvent } from 'react';
 import style from "./GetQuotes.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function GetQuotes() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [reply, setReply] = useState("");
-  const [alert, setAlert] = useState(false);
+ 
 
 
     const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
@@ -30,24 +32,17 @@ function GetQuotes() {
             setName("");
             setEmail("");
             setMessage("")
-            setAlert(true)
-            setReply("Thanks for reaching out, we will get back to you soon!");
-            clearReply();
+            toast.success("Thanks for reaching out, we will get back to you soon!");
+           
           } else {
-            setAlert(true)
-            setReply("Please complete all fields");
-            clearReply();
+            toast.error("Please complete all fields");
           }
         } catch (err) {
           console.log(err);
         }
   }
 
-  const clearReply = () => {
-      setTimeout(() => {
-          setAlert(false)
-      }, 3000)
-  }
+  
 
 
 
@@ -93,11 +88,12 @@ function GetQuotes() {
            ></textarea>
            </div>
            <button type="submit" className={style.button}>Get a Free Quote</button>
-           {alert &&  <div className={style.reply}><p>{reply}</p></div>} 
+          
           
           </form>
         </div>
-    </div>          
+    </div> 
+    <ToastContainer />         
 </section>
 
 
