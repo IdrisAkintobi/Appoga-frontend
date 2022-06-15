@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const AdminOverview = () => {
-  return (
-    <div>Overview</div>
-  )
-}
+  return <div>AdminOverview</div>;
+};
 
-export default AdminOverview
+export default AdminOverview;
