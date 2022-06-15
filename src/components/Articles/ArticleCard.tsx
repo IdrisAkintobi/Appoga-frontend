@@ -1,16 +1,21 @@
 import { FaCalendarMinus, FaArrowRight } from "react-icons/fa";
 import cardStyle from "./ArticleCard.module.css";
+import { Link } from "react-router-dom";
 type PropsType = {
-  //   [key: string]: any;
   data: {
-    imgUrl: string;
+    _id: string;
+    title: string;
+    message: string;
+    summary: string;
+    username: string;
     category: string;
-    details: string;
+    description: string;
     createdAt: string;
+    updatedAt: string;
   };
 };
 const ArticleCard: React.FC<PropsType> = ({
-  data: { imgUrl, category, details, createdAt },
+  data: { category, description, createdAt },
 }) => {
   //Convert date
   const date = new Date(createdAt).toLocaleDateString("en-US", {
@@ -23,20 +28,25 @@ const ArticleCard: React.FC<PropsType> = ({
     <>
       <div className={cardStyle.card}>
         <div className={cardStyle.card_img}>
-          <img src={imgUrl} alt="logo" />
+          <img src={"./sample.png"} alt="logo" />
         </div>
         <div className={cardStyle.card_content}>
           <button className={cardStyle.card_button}>{category}</button>
-          <div className={cardStyle.card_text}>{details}</div>
+          <div className={cardStyle.card_text}>{description}</div>
         </div>
         <div className={cardStyle.card_base}>
           <div className={cardStyle.left_base}>
-            <FaCalendarMinus className={cardStyle.base_icon} />
+            <FaCalendarMinus
+              className={`${cardStyle.base_icon} ${cardStyle.calendar_icon}`}
+            />
+            {date}
           </div>
-          {date}
+
           <div className={cardStyle.right_base}>
-            Read more{" "}
-            <FaArrowRight color="#fff" className={cardStyle.base_icon} />
+            <Link to={""}>
+              Read more
+              <FaArrowRight color="#fff" className={cardStyle.base_icon} />
+            </Link>
           </div>
         </div>
       </div>
