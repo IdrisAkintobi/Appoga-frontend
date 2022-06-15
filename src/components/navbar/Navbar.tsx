@@ -14,8 +14,8 @@ const Navbar = () => {
       </div>
       <div className={NavbarStyles.nav__items}>
         {
-          data.map((item: Record<string, any>) => (
-            <Dropdown allData={item}/>
+          data.map((item: Record<string, any>, index) => (
+            <Dropdown allData={item} key={index}/>
           ))
         }
       </div>
